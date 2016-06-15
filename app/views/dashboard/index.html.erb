@@ -1,0 +1,45 @@
+<div class="container">
+  <a class='waves-effect waves-light btn modal-trigger' href="#modal1">
+  Add Todo
+</a>
+
+  <h1>Dashboard</h1>
+  <% if Todo.count > 0 %>
+  <table class="highlight">
+    <thead>
+      <tr>
+        <th>Done</th>
+        <th>Priority</th>
+        <th>Task</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% Todo.all.each do |todo| %>
+        <tr>
+          <td><%= todo.done %></td>
+          <td><%= todo.priority %></td>
+          <td><%= todo.task%></td>
+          <td><%= button_to 'Delete',todo_path(todo), data: { confirm: "Are you sure?" }, class: 'btn btn-default delete', form: {id: todo.id}, method: :delete%></td>
+
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <% end %>
+</div>
+
+<div id="modal1" class="modal">
+   <div class="modal-content">
+     <h4>Add a Todo</h4>
+     <%= form_for :todo  do |f| %>
+      <div class="input-field">
+        <%= f.text_field :task, placeholder: "Task name" %> <br/>
+        <%=  %><br/>
+        <%=  %><br/>
+        <%= f.submit "Save Todo", class: 'waves-effect waves-light btn' %>
+      </div>
+     <% end %>
+   </div>
+
+ </div>
